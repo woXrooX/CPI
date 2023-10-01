@@ -7,9 +7,15 @@ namespace woXrooX{
 
 	class CPI{
 	public:
-		static std::string bridge(const std::string& data){
-			const std::string prepared = "python3 source/CPI.py '" +data+ "'";
+		static std::string absolute_path;
+		static std::string file_name;
 
+		static std::string bridge(const std::string& data){
+			if(CPI::absolute_path.empty()) return "Ivalid path";
+			if(CPI::file_name.empty()) return "Ivalid filename";
+
+			// python3 source/CPI.py absolute_path file_name data
+			const std::string prepared = "python3 source/CPI.py " +CPI::absolute_path+ " " +CPI::file_name+ " '" +data+ "'";
 			char buffer[128];
 
 			std::string response = "";
@@ -28,8 +34,10 @@ namespace woXrooX{
 			pclose(pipe);
 			return response;
 		}
-
 	};
+
+	std::string CPI::absolute_path;
+	std::string CPI::file_name;
 }
 
 #endif
