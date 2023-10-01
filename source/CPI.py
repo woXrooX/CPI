@@ -23,9 +23,7 @@ def main():
 	data = sys.argv[3]
 
 	f = import_file(absolute_path, file_name)
-	if f != False: f()
-
-	print(data)
+	if f != False: f(data)
 
 	sys.stdout.buffer.write(b"Response from CPI.py\n")
 
